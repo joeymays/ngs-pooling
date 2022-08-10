@@ -128,6 +128,12 @@ server <- function(input, output) {
                   colnames = c("Sample Name", "Concentration (ng/uL)", "Reads Requested (M)", "Relative Representation (%)","Avg Library Size (bp)", "Concentration (pM)", "Amount to Pool (ul)")) %>% 
             formatRound(columns = c(2,3,4,6,7), digits = c(2, 0, 2, 0, 2)))
     
+    observeEvent(input$input.data.table_cell_edit, {
+        input.data.table(editData(input.data.table(), input$input.data.table_cell_edit, rownames = F)) 
+    })
+    
+    
+    
     output$TableDownload <- downloadHandler(
         filename = function() {
             paste0("ngs-pooling_",as.character(Sys.Date()),".txt")
