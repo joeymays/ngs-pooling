@@ -1,6 +1,5 @@
 library(shiny)
 library(DT)
-#library(dplyr)
 
 
 ui <- fluidPage(
@@ -59,14 +58,14 @@ server <- function(input, output) {
     
     observeEvent(toListen(), {
         req(input$sample.name)
-        print(input.data.table())
+        #print(input.data.table())
         temp.input <- input.data.table()
 
         if(sum(temp.input$avg.lib.size) != 0){
 
         temp.input$calc.conc <- temp.input$input.conc/1000/660*10^6/temp.input$avg.lib.size*10^6
         }
-        print(sum(temp.input$calc.conc))
+        #print(sum(temp.input$calc.conc))
         if(sum(temp.input$calc.conc) != 0){
             amt.to.pool.prelim <- (temp.input$relative.representation*input$final.vol)/(temp.input$calc.conc)
             amt.to.pool.prelim.sum <- sum(amt.to.pool.prelim) / 100
