@@ -17,13 +17,19 @@ ui <- fluidPage(
             h5("Set all average library sizes:"),
             fluidRow(
                 column(6,
-                       actionButton("avg.size.320", "320 bp")),
+                       actionButton("avg.size.320", "320 bp", class = "btn-primary")),
                 column(6, 
-                       actionButton("avg.size.1000", "1000 bp"))
+                       actionButton("avg.size.1000", "1000 bp", class = "btn-primary"))
             ),
             p(" "),
-            numericInput("final.vol", "Pool Volume (ul)", value = 50),
+            numericInput("final.vol", "Pool Volume (uL)", value = 50),
             downloadButton("TableDownload", label = "Download Results", class = "btn-success"),
+            hr(),
+            h3("Instructions"),
+            p("1. Copy sample names from spreadsheet and paste in box."),
+            p("2. Copy and paste concentrations and requested reads."),
+            p("3. Click buttons to set avg library size."),
+            p("4. Edit cells as necessary by double clicking. Click outside the table to save.")
         ),
 
         mainPanel(
