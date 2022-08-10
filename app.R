@@ -1,9 +1,7 @@
 library(shiny)
 library(DT)
 
-
 ui <- fluidPage(
-
     HTML(r"(<p style="text-align:center;">Joey Mays - Updated 2022-08-10</p>)"),
     
     titlePanel("NGS Library Pooling Calculator"),
@@ -11,7 +9,7 @@ ui <- fluidPage(
     sidebarLayout(
         sidebarPanel(width = 3,
             textInput("sample.name", "Sample Names", placeholder = "paste here"),
-            textInput("input.conc", "Concentration (ng/uL)", placeholder = "paste here"),
+            textInput(inputId = "input.conc", "Concentration (ng/uL)", placeholder = "paste here"),
             textInput("n.req.reads", "Reads Requested (M)", placeholder = "paste here"),
             h5("Set all average library sizes:"),
             fluidRow(
@@ -69,7 +67,7 @@ server <- function(input, output) {
         if(sum(temp.input$calc.conc) != 0){
             amt.to.pool.prelim <- (temp.input$relative.representation*input$final.vol)/(temp.input$calc.conc)
             amt.to.pool.prelim.sum <- sum(amt.to.pool.prelim) / 100
-            print(paste0("amt to pool prelim sum ", amt.to.pool.prelim.sum))
+            #print(paste0("amt to pool prelim sum ", amt.to.pool.prelim.sum))
             pooling.conc(input$final.vol / amt.to.pool.prelim.sum)
             temp.input$amt.to.pool.prelim <- amt.to.pool.prelim * pooling.conc() * 0.01
         }
@@ -92,6 +90,10 @@ server <- function(input, output) {
         raw.paste <- input$input.conc
         raw.paste <- strsplit(raw.paste, "\\s")[[1]]
         temp.input <- input.data.table()
+        
+        n.row.correct <- nrow(temp.input) == length(raw.paste)
+        req(n.row.correct)
+        
         temp.input$input.conc <- as.numeric(raw.paste)
         input.data.table(temp.input)
     })
@@ -101,6 +103,10 @@ server <- function(input, output) {
         raw.paste <- input$n.req.reads
         raw.paste <- strsplit(raw.paste, "\\s")[[1]]
         temp.input <- input.data.table()
+        
+        n.row.correct <- nrow(temp.input) == length(raw.paste)
+        req(n.row.correct)
+        
         temp.input$n.req.reads <- as.numeric(raw.paste)
         temp.input$relative.representation <- round(100 * temp.input$n.req.reads / sum(temp.input$n.req.reads),2)
         input.data.table(temp.input)
