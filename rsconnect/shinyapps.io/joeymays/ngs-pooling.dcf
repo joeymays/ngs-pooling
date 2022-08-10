@@ -5,10 +5,10 @@ account: joeymays
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 6766666
-bundleId: 6189403
+bundleId: 6189545
 url: https://joeymays.shinyapps.io/ngs-pooling/
-when: 1660160700.3558
-lastSyncTime: 1660160700.35581
+when: 1660163354.92728
+lastSyncTime: 1660163354.92729
 asMultiple: FALSE
 asStatic: FALSE
 ignoredFiles: example.table.txt|sequencing-pooling.R
