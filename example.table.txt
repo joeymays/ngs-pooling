@@ -1,0 +1,5 @@
+sample.name	average.size	qubit	reads.requested
+Example1	1000	33	40
+Example2	1000	45	40
+Example3	1000	28	40
+Example4	1000	10	40
